@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
-
+import logo from "./logo.svg";
+import "./App.css";
+import { useSettingStore } from "./store";
+import People from "./components/People";
+import { useEffect } from "react";
 function App() {
+  const toggleDarkMode = useSettingStore((state) => state.toggleDarkMode);
+  const dark = useSettingStore((state) => state.dark);
+
+  useEffect(() => {
+    document.querySelector("body").classList.toggle("dark");
+  }, [dark]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="">
+      <button onClick={toggleDarkMode}>Toggle</button>
+      <People />
     </div>
   );
 }
